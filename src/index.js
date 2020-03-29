@@ -3,6 +3,7 @@ const fastify = require("fastify")({
   logger: true
 });
 const mongoose = require("mongoose");
+const routes = require("./routes");
 
 // Connect to DB
 const connectDb = async () => {
@@ -25,17 +26,17 @@ connectDb();
 //     console.log("An error ocurred", error);
 //   });
 
-// Test object
-const movie = {
-  title: "1917",
-  year: 2019,
-  genres: ["Drama", "War"],
-  director: "Sam Mendes",
-  duration: { measure: "minutes", quantity: 119 }
-};
+// // Test object
+// const movie = {
+//   title: "1917",
+//   year: 2019,
+//   genres: ["Drama", "War"],
+//   director: "Sam Mendes",
+//   duration: { measure: "minutes", quantity: 119 }
+// };
 
-// Declare a route
-fastify.get("/movies", async (request, reply) => [movie]);
+// // Declare a route
+// fastify.get("/movies", async (request, reply) => [movie]);
 
 // Running the server
 const start = async () => {
@@ -50,4 +51,13 @@ const start = async () => {
   }
 };
 
+// Loops over the routes array and initialize each with Fastify
+const initializeApiRoutes = () => {
+  routes.forEach(route => {
+    console.log("initializeApiRoutes -> route", route);
+    fastify.route(route);
+  });
+};
+
+initializeApiRoutes();
 start();

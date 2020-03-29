@@ -1,5 +1,5 @@
-import boom from "boom";
-import Movie from "../models/Movie";
+const boom = require("boom");
+const Movie = require("../models/Movie");
 
 // Make boom to handle errors
 const boomifyError = error => {
@@ -55,7 +55,7 @@ exports.updateMovie = async (req, res) => {
 };
 
 // Delete a movie
-exports.deleteCar = async (req, res) => {
+exports.deleteMovie = async (req, res) => {
   try {
     const id = req.params.id;
     const movie = await Movie.findByIdAndRemove(id);
